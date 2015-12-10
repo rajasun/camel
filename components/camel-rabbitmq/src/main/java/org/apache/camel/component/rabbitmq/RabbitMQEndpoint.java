@@ -207,7 +207,8 @@ public class RabbitMQEndpoint extends DefaultEndpoint {
         
         if (deadLetterExchange != null) {
             queueArgs.put(RabbitMQConstants.RABBITMQ_DEAD_LETTER_EXCHANGE, getDeadLetterExchange());
-            queueArgs.put(RabbitMQConstants.RABBITMQ_DEAD_LETTER_ROUTING_KEY, getDeadLetterRoutingKey());
+            if(null != getDeadLetterRoutingKey())
+              queueArgs.put(RabbitMQConstants.RABBITMQ_DEAD_LETTER_ROUTING_KEY, getDeadLetterRoutingKey());
             // TODO Do we need to setup the args for the DeadLetter?
             channel.exchangeDeclare(getDeadLetterExchange(),
                     getDeadLetterExchangeType(),
